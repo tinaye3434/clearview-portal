@@ -15,6 +15,12 @@ class Register extends Component
 {
     public string $name = '';
 
+    public string $address = '';
+
+    public string $phone = '';
+
+    public string $type = '';
+
     public string $email = '';
 
     public string $password = '';
@@ -30,6 +36,10 @@ class Register extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'address' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric', 'max:10'],
+            'type' => ['required', 'string', 'max:255'],
+
         ]);
 
         $validated['password'] = Hash::make($validated['password']);

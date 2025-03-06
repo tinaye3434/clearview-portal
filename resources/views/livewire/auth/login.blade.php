@@ -1,53 +1,52 @@
-<div class="flex flex-col gap-6">
-    <x-auth-header title="Log in to your account" description="Enter your email and password below to log in" />
+<div>
+    <x-layouts.auth>
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+             data-sidebar-position="fixed" data-header-position="fixed">
+            <div
+                class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-center w-100">
+                    <div class="row justify-content-center w-100">
+                        <div class="col-md-8 col-lg-6 col-xxl-4">
+                            <div class="card mb-0">
+                                <div class="card-body">
+                                    <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                        <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                                    </a>
+                                    <p class="text-center">Your Social Campaigns</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+                                    <!-- Session Status -->
+                                    <x-auth-session-status class="text-center" :status="session('status')" />
 
-    <form wire:submit="login" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            name="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
-
-        <!-- Password -->
-        <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Password')"
-                type="password"
-                name="password"
-                required
-                autocomplete="current-password"
-                placeholder="Password"
-            />
-
-            @if (Route::has('password.request'))
-                <flux:link class="absolute right-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </flux:link>
-            @endif
+                                    <form wire:submit="login">
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                                            <input wire:model="email" type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                                            <input wire:model="password" type="password" class="form-control" id="exampleInputPassword1" name="password">
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
+                                                <label class="form-check-label text-dark" for="flexCheckChecked">
+                                                    Remember this Device
+                                                </label>
+                                            </div>
+                                            <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <p class="fs-4 mb-0 fw-bold">New to ClearView Portal?</p>
+                                            <a class="text-primary fw-bold ms-2" href="{{ route('register') }}">Create an account</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
-
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
-        </div>
-    </form>
-
-    @if (Route::has('register'))
-      <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
-          Don't have an account?
-          <flux:link :href="route('register')" wire:navigate>Sign up</flux:link>
-      </div>
-    @endif
+    </x-layouts.auth>
 </div>
